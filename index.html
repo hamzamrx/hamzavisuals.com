@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hamza Tarmast | Video Editor Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;800;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;600;700&display=swap');
+        
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: #020204;
+            color: #e5e5e5;
+            overflow-x: hidden;
+        }
+
+        .font-arabic { font-family: 'IBM Plex Sans Arabic', sans-serif; }
+
+        /* Custom Scrollbar - Grey */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0f0f0f; }
+        ::-webkit-scrollbar-thumb { background: #52525b; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #71717a; }
+
+        /* Cinematic Glass UI */
+        .glass-cinema {
+            background: rgba(20, 20, 25, 0.6);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-cinema:hover {
+            background: rgba(30, 30, 35, 0.8);
+            border-color: rgba(255, 255, 255, 0.2); 
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Portfolio Card Specific */
+        .portfolio-card {
+            background: rgba(20, 20, 25, 0.4);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.3s ease;
+            overflow: hidden;
+            position: relative;
+        }
+        .portfolio-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.5);
+        }
+
+        /* PREMIUM PULSE BUTTON (Purple) */
+        .premium-btn {
+            background: #8b5cf6;
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+        }
+        .premium-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 30px rgba(139, 92, 246, 0.6);
+            background: #7c3aed;
+        }
+        .premium-btn::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(255,255,255,0.2), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .premium-btn:hover::after { opacity: 1; }
+
+        /* WHITE PREMIUM BUTTON (For About Section) */
+        .white-premium-btn {
+            background: #ffffff;
+            color: #000000;
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+            border: 1px solid white;
+        }
+        .white-premium-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.4);
+            background: #f3f4f6;
+        }
+
+        /* Stats Badge - Corner Rectangle */
+        .stats-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: rgba(0, 0, 0, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 6px 12px;
+            border-radius: 6px; 
+            z-index: 30;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+            pointer-events: none;
+        }
+
+        /* WhatsApp Badge - Corner Hugging Design */
+        .whatsapp-badge {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background-color: #10b981;
+            color: black;
+            font-size: 0.8rem;
+            font-weight: 800;
+            padding: 8px 16px;
+            border-bottom-left-radius: 20px;
+            box-shadow: -2px 2px 10px rgba(16,185,129,0.3);
+            z-index: 10;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        [dir="rtl"] .whatsapp-badge {
+            right: auto;
+            left: 0;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 20px;
+        }
+
+        /* STICKY WHATSAPP BUTTON (Bottom Right) */
+        .sticky-wa-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background-color: #25D366;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            z-index: 9999;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .sticky-wa-btn:hover {
+            transform: scale(1.1) translateY(-5px);
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.6);
+        }
+        /* Pulse Animation Ring */
+        .sticky-wa-btn::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: #25D366;
+            opacity: 0.5;
+            z-index: -1;
+            animation: pulse-ring 2s infinite;
+        }
+        @keyframes pulse-ring {
+            0% { transform: scale(1); opacity: 0.5; }
+            100% { transform: scale(1.6); opacity: 0; }
+        }
+
+        /* Animation utilities */
+        .fade-in-up { animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; transform: translateY(30px); }
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+
+        /* Video Modal */
+        #video-modal.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+        #video-modal:not(.hidden) { opacity: 1; visibility: visible; pointer-events: auto; }
+        
+        /* Language Active State - Color Coded & Underlined */
+        .lang-btn { 
+            font-weight: 700; 
+            opacity: 0.6; 
+            transition: all 0.3s; 
+            position: relative; 
+            padding-bottom: 2px;
+        }
+        .lang-btn:hover { opacity: 1; }
+        
+        .lang-btn::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            transition: width 0.3s ease;
+        }
+
+        .lang-btn.active { opacity: 1; transform: scale(1.05); }
+        .lang-btn.active::after { width: 100%; }
+        
+        .lang-btn#lang-en.active { color: #3b82f6; } .lang-btn#lang-en.active::after { background-color: #3b82f6; }
+        .lang-btn#lang-fr.active { color: #a855f7; } .lang-btn#lang-fr.active::after { background-color: #a855f7; }
+        .lang-btn#lang-ar.active { color: #10b981; } .lang-btn#lang-ar.active::after { background-color: #10b981; }
+
+        /* Background Mesh */
+        .mesh-bg {
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(139, 92, 246, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(59, 130, 246, 0.1) 0px, transparent 50%);
+        }
+        
+        /* Glass Overlay for Video Cards - UPDATED FOR HOVER EFFECT */
+        .glass-overlay {
+            background: rgba(0, 0, 0, 0.85); /* Slightly darker for better readability */
+            backdrop-filter: blur(12px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 20; /* Ensure it's above other elements */
+            
+            /* Hide by default */
+            opacity: 0;
+            transform: translateY(100%);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        /* Show on hover */
+        .portfolio-card:hover .glass-overlay {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .play-btn-container { z-index: 10; }
+
+        /* Hand Drawn Underline */
+        .drawn-underline {
+            position: relative;
+            display: inline-block;
+        }
+        .drawn-underline svg {
+            position: absolute;
+            bottom: -15px;
+            left: 0;
+            width: 100%;
+            height: 20px;
+            z-index: -1;
+            overflow: visible;
+        }
+        .drawn-underline path {
+            stroke: #8b5cf6;
+            stroke-width: 8;
+            stroke-linecap: round;
+            fill: none;
+            opacity: 0.8;
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            purple: '#8b5cf6',
+                            green: '#10b981',
+                            red: '#ef4444',
+                            blue: '#3b82f6',
+                            gold: '#f59e0b'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="antialiased relative selection:bg-brand-purple selection:text-white" id="body-content">
+
+    <!-- NEW Sticky WhatsApp Button (Bottom Right) -->
+    <a href="https://wa.me/212752890044" target="_blank" class="sticky-wa-btn group" title="Chat on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+        <!-- Online Indicator -->
+        <span class="absolute right-full mr-4 bg-white text-black text-xs font-bold px-3 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-lg pointer-events-none transform translate-x-2 group-hover:translate-x-0 transition-all duration-300">
+            Online Now <span class="text-green-500 animate-pulse">●</span>
+        </span>
+    </a>
+
+    <!-- Cinematic Background -->
+    <div class="fixed inset-0 -z-10 bg-[#020204] mesh-bg"></div>
+    <div class="fixed inset-0 -z-10 opacity-[0.03]" style="background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'1\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 top-0 transition-all duration-300 border-b border-white/5 bg-[#020204]/80 backdrop-blur-xl" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <img src="images/logo.png" alt="Hamza Tarmast Logo" class="w-12 h-12 object-contain hover:opacity-80 transition-opacity">
+                </div>
+                
+                <!-- Desktop Nav -->
+                <div class="hidden md:flex items-center gap-8">
+                    <div class="flex gap-8 text-sm font-bold tracking-wide">
+                        <a href="#home" class="text-gray-400 hover:text-white transition-colors" data-i18n="nav-home">HOME</a>
+                        <a href="#portfolio" class="text-gray-400 hover:text-white transition-colors" data-i18n="nav-portfolio">PORTFOLIO</a>
+                        <a href="#about" class="text-gray-400 hover:text-white transition-colors" data-i18n="nav-about">ABOUT</a>
+                    </div>
+
+                    <!-- Language Switcher -->
+                    <div class="flex items-center gap-4 text-xs font-bold border-l border-white/10 pl-6 h-6 text-gray-500">
+                        <button onclick="changeLang('en')" class="lang-btn active" id="lang-en">EN</button>
+                        <button onclick="changeLang('fr')" class="lang-btn" id="lang-fr">FR</button>
+                        <button onclick="changeLang('ar')" class="lang-btn" id="lang-ar">عربي</button>
+                    </div>
+
+                    <a href="#contact" class="bg-white text-black hover:bg-gray-200 px-6 py-2.5 rounded-full text-xs font-black tracking-wider transition-all transform hover:scale-105" data-i18n="nav-cta">START PROJECT</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button onclick="toggleMenu()" class="md:hidden text-gray-300 hover:text-white focus:outline-none">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div class="md:hidden hidden bg-[#020204] border-b border-white/10" id="mobile-menu">
+            <div class="px-4 pt-4 pb-6 space-y-2">
+                <a href="#home" onclick="toggleMenu()" class="block text-gray-300 hover:text-brand-purple font-bold" data-i18n="nav-home">Home</a>
+                <a href="#portfolio" onclick="toggleMenu()" class="block text-gray-300 hover:text-brand-purple font-bold" data-i18n="nav-portfolio">Portfolio</a>
+                <a href="#about" onclick="toggleMenu()" class="block text-gray-300 hover:text-brand-purple font-bold" data-i18n="nav-about">About</a>
+                <div class="flex gap-4 py-3 text-sm font-bold text-gray-500 border-t border-white/10 mt-2">
+                    <button onclick="changeLang('en')" class="text-brand-blue">EN</button>
+                    <button onclick="changeLang('fr')" class="text-brand-purple">FR</button>
+                    <button onclick="changeLang('ar')" class="text-brand-green">عربي</button>
+                </div>
+                <a href="#contact" onclick="toggleMenu()" class="block text-brand-purple font-black mt-4" data-i18n="nav-cta">START PROJECT</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION (Clean Text Only) -->
+    <section id="home" class="min-h-screen pt-32 pb-20 relative flex flex-col items-center justify-center overflow-hidden">
+        
+        <!-- Text Content -->
+        <div class="container mx-auto px-4 text-center z-10 max-w-4xl fade-in-up">
+            <div class="inline-flex items-center gap-2 px-3 py-1 mb-6 rounded-full border border-brand-purple/20 bg-brand-purple/5 backdrop-blur-md">
+                <span class="w-1.5 h-1.5 rounded-full bg-brand-purple animate-pulse"></span>
+                <span class="text-brand-purple text-[10px] font-bold tracking-[0.2em] uppercase" data-i18n="hero-tag">Strategic Video Editor</span>
+            </div>
+            
+            <!-- White Title with Drawn Underline -->
+            <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold text-white leading-[0.95] tracking-tight mb-8" data-i18n="hero-title">
+                Stop the Scroll.<br>
+                Drive <span class="drawn-underline">Results.<svg viewBox="0 0 200 20"><path d="M5 15 Q 100 0 195 15" /></svg></span>
+            </h1>
+            
+            <p class="text-gray-400 text-lg md:text-xl mb-12 max-w-2xl mx-auto leading-relaxed font-light" data-i18n="hero-desc">
+                I don't just edit videos; I engineer assets that convert. Whether it's high-retention YouTube content or ROAS-focused ad creatives, I help you dominate your niche.
+            </p>
+            
+            <div class="flex flex-wrap gap-6 justify-center mb-16 items-center">
+                <a href="#portfolio" class="premium-btn rounded-full px-8 py-4 font-bold text-white flex items-center gap-2 group text-sm tracking-wide">
+                    <span class="relative z-10" data-i18n="hero-btn-1">SEE THE PROOF</span> 
+                    <i class="fas fa-arrow-right relative z-10 group-hover:translate-x-1 transition-transform rtl-flip"></i>
+                </a>
+                
+                <a href="#contact" class="px-8 py-4 glass-cinema text-white rounded-full font-bold transition-all hover:bg-white/10 text-sm tracking-wide" data-i18n="hero-btn-2">
+                    BOOK A CALL
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- PORTFOLIO SECTION -->
+    <section id="portfolio" class="py-24 bg-[#050508] relative border-y border-white/5">
+        <div class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col items-center mb-16 text-center">
+                <span class="text-brand-purple text-[10px] font-bold tracking-[0.2em] uppercase mb-3" data-i18n="portfolio-tag">MY BEST WORK</span>
+                <h2 class="text-4xl md:text-5xl font-bold text-white mb-8" data-i18n="portfolio-title">Selected <span class="text-brand-purple">Case Studies</span></h2>
+                
+                <!-- Category Buttons -->
+                <div class="flex flex-wrap justify-center gap-3">
+                    <button onclick="filterPortfolio('all')" class="filter-btn active px-6 py-2 rounded-full border border-brand-purple bg-brand-purple text-white text-xs font-bold tracking-wider transition-all" id="btn-all" data-i18n="cat-all">All Projects</button>
+                    
+                    <button onclick="filterPortfolio('ads')" class="filter-btn px-6 py-2 rounded-full border border-white/10 text-gray-400 text-xs font-bold tracking-wider transition-all hover:text-white hover:border-brand-green" id="btn-ads">
+                        <span class="w-2 h-2 rounded-full bg-brand-green inline-block mr-2"></span><span data-i18n="cat-ads">Paid Ads & Conversions</span>
+                    </button>
+                    
+                    <button onclick="filterPortfolio('youtube')" class="filter-btn px-6 py-2 rounded-full border border-white/10 text-gray-400 text-xs font-bold tracking-wider transition-all hover:text-white hover:border-brand-red" id="btn-youtube">
+                        <span class="w-2 h-2 rounded-full bg-brand-red inline-block mr-2"></span><span data-i18n="cat-youtube">YouTube & Long-Form</span>
+                    </button>
+                    
+                    <button onclick="filterPortfolio('motion')" class="filter-btn px-6 py-2 rounded-full border border-white/10 text-gray-400 text-xs font-bold tracking-wider transition-all hover:text-white hover:border-brand-blue" id="btn-motion">
+                        <span class="w-2 h-2 rounded-full bg-brand-blue inline-block mr-2"></span><span data-i18n="cat-motion">Motion Graphics</span>
+                    </button>
+                    
+                    <button onclick="filterPortfolio('vsl')" class="filter-btn px-6 py-2 rounded-full border border-white/10 text-gray-400 text-xs font-bold tracking-wider transition-all hover:text-white hover:border-brand-gold" id="btn-vsl">
+                        <span class="w-2 h-2 rounded-full bg-brand-gold inline-block mr-2"></span><span data-i18n="cat-vsl">VSLs & Funnels</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Portfolio Grid - UPDATED TO 5 COLUMNS -->
+            <!-- Using Masonry via CSS columns for cleaner dense packing -->
+            <div class="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 2xl:columns-5 gap-6 space-y-6" id="portfolio-grid">
+                <!-- JS Populated -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="py-24 relative bg-dark-800/20 border-y border-white/5">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col-reverse md:flex-row items-center gap-16">
+                
+                <!-- Text Left -->
+                <div class="w-full md:w-1/2">
+                    <h2 class="text-3xl md:text-5xl font-bold mb-6 text-white" data-i18n="about-title">About <span class="text-brand-purple">Me</span></h2>
+                    <p class="text-gray-400 text-lg mb-8 leading-relaxed font-light" data-i18n="about-desc">
+                        Hi, I'm Hamza. With over 5 years of experience in the digital space, I specialize in creating high-impact video content that doesn't just look good—it sells. 
+                        <br><br>
+                        I understand the psychology behind viewer retention and conversion. Whether you are an agency owner, a content creator, or a brand, my goal is to save you time while maximizing your output quality.
+                    </p>
+                    
+                    <!-- MOVED STATS GRID HERE -->
+                    <div class="grid grid-cols-2 gap-4 mb-8">
+                         <div class="glass-cinema rounded-xl p-4 border border-white/5 flex flex-col items-start justify-center hover:border-brand-purple/30 transition-colors">
+                            <div class="flex items-center gap-2 mb-1">
+                                <i class="fas fa-calendar-alt text-lg text-white"></i>
+                                <span class="text-2xl font-bold text-white">5+</span>
+                            </div>
+                            <div class="text-[9px] font-bold text-gray-500 uppercase tracking-widest" data-i18n="stat-exp">Years Exp</div>
+                         </div>
+                         
+                         <div class="glass-cinema rounded-xl p-4 border border-white/5 flex flex-col items-start justify-center hover:border-brand-purple/30 transition-colors">
+                            <div class="flex items-center gap-2 mb-1">
+                                <i class="fas fa-layer-group text-lg text-white"></i>
+                                <span class="text-2xl font-bold text-white">150+</span>
+                            </div>
+                            <div class="text-[9px] font-bold text-gray-500 uppercase tracking-widest" data-i18n="stat-projects">Projects</div>
+                         </div>
+
+                         <div class="glass-cinema rounded-xl p-4 border border-white/5 flex flex-col items-start justify-center hover:border-brand-purple/30 transition-colors">
+                            <div class="flex items-center gap-2 mb-1">
+                                <i class="fas fa-eye text-lg text-white"></i>
+                                <span class="text-2xl font-bold text-white">5M+</span>
+                            </div>
+                            <div class="text-[9px] font-bold text-gray-500 uppercase tracking-widest" data-i18n="stat-views-gen">Views</div>
+                         </div>
+
+                         <div class="glass-cinema rounded-xl p-4 border border-white/5 flex flex-col items-start justify-center hover:border-brand-purple/30 transition-colors">
+                            <div class="flex items-center gap-2 mb-1">
+                                <i class="fas fa-star text-lg text-brand-gold"></i>
+                                <span class="text-2xl font-bold text-white">70+</span>
+                            </div>
+                            <div class="text-[9px] font-bold text-gray-500 uppercase tracking-widest" data-i18n="stat-reviews">5-Star Reviews</div>
+                         </div>
+                    </div>
+
+                    <!-- UPDATED BUTTON TEXT (Premium White Button) -->
+                    <a href="#contact" class="white-premium-btn rounded-full px-8 py-3.5 font-bold inline-flex items-center gap-2 group text-sm tracking-wide">
+                        <span class="relative z-10" data-i18n="about-btn">Contact me</span>
+                        <i class="fas fa-chevron-right relative z-10 ml-1 text-xs rtl-flip group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                </div>
+
+                <!-- Image Right -->
+                <div class="w-full md:w-1/2 relative flex justify-center md:justify-end">
+                    <div class="relative w-72 h-96">
+                        <div class="absolute inset-0 border-2 border-brand-purple/30 rounded-2xl transform translate-x-4 translate-y-4"></div>
+                        <div class="absolute inset-0 border-2 border-white/10 rounded-2xl transform -translate-x-4 -translate-y-4"></div>
+                        <!-- Profile Pic -->
+                        <div class="absolute inset-0 rounded-2xl overflow-hidden bg-gray-800 shadow-2xl">
+                            <img id="profile-pic" src="images/me.png" onerror="this.src='https://images.unsplash.com/photo-1622612921319-33589b2c3248?auto=format&fit=crop&q=80&w=800'" class="w-full h-full object-cover opacity-90">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION (UNBOXED) -->
+    <section id="contact" class="py-24 relative bg-[#050505] border-t border-white/5">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-5xl font-bold mb-6 text-white" data-i18n="contact-title">Ready to <span class="text-brand-purple">Scale?</span></h2>
+                <p class="text-gray-400 mb-12 max-w-lg mx-auto" data-i18n="contact-desc">You focus on the content. I'll handle the retention and conversions.</p>
+            </div>
+
+            <!-- Modified Grid for Bigger WhatsApp -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl mx-auto">
+                <!-- WhatsApp (Big / Top) -->
+                <a href="https://wa.me/212752890044" target="_blank" class="md:col-span-2 bg-[#10b981]/5 border border-[#10b981]/20 hover:bg-[#10b981]/10 hover:border-[#10b981]/50 p-10 rounded-3xl flex flex-col items-center justify-center transition-all group relative shadow-lg shadow-brand-green/5 overflow-hidden">
+                    <!-- NEW CORNER BADGE -->
+                    <div class="whatsapp-badge" data-i18n="badge-reply">
+                        Fastest Reply!
+                    </div>
+                    
+                    <!-- Watermark -->
+                    <i class="fab fa-whatsapp absolute -bottom-8 -right-8 text-9xl text-[#10b981]/[0.05] group-hover:text-[#10b981]/[0.1] transition-all duration-500 transform -rotate-12 group-hover:rotate-0 group-hover:scale-110 pointer-events-none"></i>
+
+                    <i class="fab fa-whatsapp text-5xl text-[#10b981] mb-4 group-hover:scale-110 transition-transform z-10"></i>
+                    <h3 class="text-xl font-bold text-white uppercase tracking-wider mb-1 z-10" data-i18n="contact-wa">WhatsApp Me</h3>
+                    <!-- Removed Number -->
+                </a>
+
+                <!-- Email (Small / Bottom Left) -->
+                <a href="mailto:hamzaet940@gmail.com" class="bg-brand-purple/5 border border-brand-purple/20 hover:bg-brand-purple/10 hover:border-brand-purple/40 p-6 rounded-2xl flex flex-col items-center justify-center transition-all group shadow-lg shadow-brand-purple/5 relative overflow-hidden">
+                    <!-- Watermark -->
+                    <i class="fas fa-envelope absolute -bottom-6 -right-6 text-7xl text-brand-purple/[0.05] group-hover:text-brand-purple/[0.1] transition-all duration-500 transform -rotate-12 group-hover:rotate-0 group-hover:scale-110 pointer-events-none"></i>
+
+                    <i class="fas fa-envelope text-2xl text-brand-purple mb-3 z-10"></i>
+                    <h3 class="text-sm font-bold text-white uppercase tracking-wider mb-1 z-10" data-i18n="contact-email">Email</h3>
+                    <p class="text-gray-500 text-xs font-mono z-10">hamzaet940@gmail.com</p>
+                </a>
+
+                <!-- LinkedIn (Small / Bottom Right) -->
+                <a href="https://www.linkedin.com/in/hamza-tarmast/" target="_blank" class="bg-blue-500/5 border border-blue-500/20 hover:bg-blue-500/10 hover:border-blue-500/50 p-6 rounded-2xl flex flex-col items-center justify-center transition-all group shadow-lg shadow-brand-blue/5 relative overflow-hidden">
+                    <!-- Watermark -->
+                    <i class="fab fa-linkedin-in absolute -bottom-6 -right-6 text-7xl text-blue-500/[0.05] group-hover:text-blue-500/[0.1] transition-all duration-500 transform -rotate-12 group-hover:rotate-0 group-hover:scale-110 pointer-events-none"></i>
+
+                    <i class="fab fa-linkedin-in text-2xl text-blue-500 mb-3 z-10"></i>
+                    <h3 class="text-sm font-bold text-white uppercase tracking-wider mb-1 z-10" data-i18n="contact-connect">LinkedIn</h3>
+                    <p class="text-gray-500 text-xs z-10">Connect Profile</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 bg-black border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-4">
+            <!-- Footer Logo -->
+            <div>
+                <img src="images/logo.png" alt="Hamza Tarmast Logo" class="w-12 h-12 object-contain opacity-80 hover:opacity-100 transition-opacity">
+            </div>
+            
+            <div class="text-gray-600 text-sm font-medium" data-i18n="footer-copy">
+                &copy; 2025 Hamza Tarmast. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Video Modal with TELLA Player -->
+    <div id="video-modal" class="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 backdrop-blur-xl p-4 hidden">
+        <div class="absolute top-6 right-6 text-white/50 hover:text-white cursor-pointer z-50 transition-colors" onclick="closeModal()">
+            <i class="fas fa-times text-4xl"></i>
+        </div>
+        <div class="flex flex-col w-full max-w-5xl items-center gap-4">
+            <div class="w-full aspect-video rounded-xl overflow-hidden shadow-2xl relative bg-black border border-white/10" id="modal-content">
+                <!-- Iframe injected here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // NEW TELLA VIDEO CONFIG
+        // ID: why-some-clients-spend-a-lot-of-money-low-conversionsfinal-1-9xm9
+        const VIDEO_ID = "why-some-clients-spend-a-lot-of-money-low-conversionsfinal-1-9xm9";
+        const EMBED_URL = `https://www.tella.tv/video/${VIDEO_ID}/embed?autoplay=true&muted=false`;
+
+        // TRANSLATIONS
+        const translations = {
+            en: {
+                "nav-home": "HOME", "nav-about": "ABOUT", "nav-portfolio": "PORTFOLIO", "nav-cta": "START PROJECT",
+                "hero-tag": "STRATEGIC VIDEO EDITOR",
+                "hero-title": `Stop the Scroll.<br>Drive <span class="drawn-underline">Results.<svg viewBox="0 0 200 20"><path d="M5 15 Q 100 0 195 15" /></svg></span>`,
+                "hero-desc": "I don't just edit videos; I engineer assets that convert. Whether it's high-retention YouTube content or ROAS-focused ad creatives, I help you dominate your niche.",
+                "hero-btn-1": "SEE THE PROOF", "hero-btn-2": "BOOK A CALL",
+                "stat-exp": "YEARS EXP", "stat-projects": "PROJECTS", "stat-views-gen": "VIEWS", "stat-reviews": "5-STAR REVIEWS",
+                "about-title": `About <span class="text-brand-purple">Me</span>`,
+                "about-desc": "Hi, I'm Hamza. With over 5 years of experience in the digital space, I specialize in creating high-impact video content that doesn't just look good—it sells. <br><br> I understand the psychology behind viewer retention and conversion. Whether you are an agency owner, a content creator, or a brand, my goal is to save you time while maximizing your output quality.",
+                "about-btn": "Contact me", 
+                "portfolio-tag": "MY BEST WORK", "portfolio-title": `Selected <span class="text-brand-purple">Case Studies</span>`, "portfolio-desc": "Real results for real clients.",
+                "cat-all": "All Projects", "cat-ads": "Paid Ads & Conversions", "cat-youtube": "YouTube & Long-Form", "cat-motion": "Motion Graphics", "cat-vsl": "VSLs & Funnels",
+                "contact-title": `Ready to <span class="text-brand-purple">Scale?</span>`, "contact-desc": "You focus on the content. I'll handle the retention and conversions.",
+                "badge-reply": "Fastest Reply!", "contact-wa": "WHATSAPP", "contact-email": "EMAIL", "contact-connect": "LINKEDIN",
+                "footer-copy": "&copy; 2025 Hamza Tarmast. All rights reserved.",
+                "badge_roas": "ROAS 4.5x",
+                "badge_clicks": "12k Clicks",
+                "badge_views": "5M+ Views",
+                "badge_top": "Top Rated",
+                "badge_viral": "Viral",
+                "badge_120leads": "120 Leads",
+                "joins_badge": "71+ Paid Community Joins", "followers_badge": "315K followers agency"
+            },
+            fr: {
+                "nav-home": "ACCUEIL", "nav-about": "À PROPOS", "nav-portfolio": "PORTFOLIO", "nav-cta": "PROJET",
+                "hero-tag": "MONTEUR VIDÉO STRATÉGIQUE",
+                "hero-title": `ARRÊTEZ LE SCROLL.<br>BOOSTEZ VOS <span class="drawn-underline">RÉSULTATS.<svg viewBox="0 0 200 20"><path d="M5 15 Q 100 0 195 15" /></svg></span>`,
+                "hero-desc": "Je ne me contente pas de monter des vidéos ; je conçois des atouts qui convertissent. Que ce soit du contenu YouTube à forte rétention ou des publicités axées sur le ROAS.",
+                "hero-btn-1": "VOIR LES PREUVES", "hero-btn-2": "RÉSERVER UN APPEL",
+                "stat-exp": "ANS D'EXP", "stat-projects": "PROJETS", "stat-views-gen": "VUES", "stat-reviews": "AVIS 5 ÉTOILES",
+                "about-title": `À Propos de <span class="text-brand-purple">Moi</span>`,
+                "about-desc": "Salut, je suis Hamza. Avec plus de 5 ans d'expérience, je me spécialise dans la création de contenu vidéo à fort impact. <br><br> Je comprends la psychologie derrière la rétention et la conversion. Que vous soyez une agence ou un créateur, mon but est de vous faire gagner du temps tout en maximisant la qualité.",
+                "about-btn": "Contactez-moi",
+                "portfolio-tag": "MES TRAVAUX", "portfolio-title": `Études de Cas <span class="text-brand-purple">Sélectionnées</span>`, "portfolio-desc": "Des résultats réels pour des clients réels.",
+                "cat-all": "Tous les Projets", "cat-ads": "Publicités & Conversions", "cat-youtube": "YouTube & Format Long", "cat-motion": "Motion Design", "cat-vsl": "VSLs & Tunnels",
+                "contact-title": `Prêt à <span class="text-brand-purple">Scaler ?</span>`, "contact-desc": "Vous vous concentrez sur le contenu. Je m'occupe de la rétention.",
+                "badge-reply": "Réponse Rapide !", "contact-wa": "WHATSAPP", "contact-email": "EMAIL", "contact-connect": "PROFIL",
+                "footer-copy": "&copy; 2025 Hamza Tarmast. Tous droits réservés.",
+                "badge_roas": "ROAS 4.5x",
+                "badge_clicks": "12k Clics",
+                "badge_views": "5M+ Vues",
+                "badge_top": "Top Classé",
+                "badge_viral": "Viral",
+                "badge_120leads": "120 Leads",
+                "joins_badge": "71+ Adhésions Payantes", "followers_badge": "Agence 315K Abonnés"
+            },
+            ar: {
+                "nav-home": "الرئيسية", "nav-about": "من أنا", "nav-portfolio": "أعمالي", "nav-cta": "ابدأ مشروعك",
+                "hero-tag": "محرر فيديو استراتيجي",
+                "hero-title": `توقف عن التمرير.<br>حقق <span class="drawn-underline">النتائج.<svg viewBox="0 0 200 20"><path d="M5 15 Q 100 0 195 15" /></svg></span>`,
+                "hero-desc": "أنا لا أقوم بتحرير الفيديوهات فحسب، بل أصمم محتوى يحقق أرباحاً. سواء كان محتوى يوتيوب عالي الجودة أو إعلانات مركزة على العائد الاستثماري.",
+                "hero-btn-1": "شاهد النتائج", "hero-btn-2": "احجز مكالمة",
+                "stat-exp": "سنوات خبرة", "stat-projects": "مشروع", "stat-views-gen": "مشاهدة", "stat-reviews": "تقييمات 5 نجوم",
+                "about-title": `نبذة <span class="text-brand-purple">عني</span>`,
+                "about-desc": "مرحباً، أنا حمزة. بخبرة تزيد عن 5 سنوات، أتخصص في إنشاء محتوى فيديو عالي التأثير. <br><br> أفهم سيكولوجية المشاهد والتحويل. سواء كنت صاحب وكالة أو صانع محتوى، هدفي هو توفير وقتك مع زيادة الجودة.",
+                "about-btn": "تواصل معي",
+                "portfolio-tag": "أفضل أعمالي", "portfolio-title": `أعمال <span class="text-brand-purple">مختارة</span>`, "portfolio-desc": "نتائج حقيقية لعملاء حقيقيين.",
+                "cat-all": "كل المشاريع", "cat-ads": "إعلانات ومبيعات", "cat-youtube": "يوتيوب ومحتوى طويل", "cat-motion": "موشن جرافيك", "cat-vsl": "فيديوهات بيع",
+                "contact-title": `جاهز <span class="text-brand-purple">للتوسع؟</span>`, "contact-desc": "ركز أنت على المحتوى، واترك لي مهمة الحفاظ على المشاهدين وزيادة المبيعات.",
+                "badge-reply": "رد سريع!", "contact-wa": "واتساب", "contact-email": "بريد إلكتروني", "contact-connect": "لينكد إن",
+                "footer-copy": "&copy; 2025 حمزة ترماست. جميع الحقوق محفوظة.",
+                "badge_roas": "عائد 4.5x",
+                "badge_clicks": "12 ألف نقرة",
+                "badge_views": "5 مليون مشاهدة",
+                "badge_top": "الأعلى تقييماً",
+                "badge_viral": "فيروسي",
+                "badge_120leads": "120 عميل محتمل",
+                "joins_badge": "71+ انضمام للمجتمع المدفوع", "followers_badge": "315 ألف متابع للوكالة"
+            }
+        };
+
+        let currentLang = 'en';
+
+        function changeLang(lang) {
+            currentLang = lang;
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll(`#lang-${lang}`).forEach(btn => btn.classList.add('active'));
+            const body = document.getElementById('body-content');
+            if(lang === 'ar') {
+                body.dir = "rtl";
+                body.classList.add('font-arabic');
+                document.querySelectorAll('.rtl-flip').forEach(el => el.classList.add('rotate-180'));
+            } else {
+                body.dir = "ltr";
+                body.classList.remove('font-arabic');
+                document.querySelectorAll('.rtl-flip').forEach(el => el.classList.remove('rotate-180'));
+            }
+            const t = translations[lang];
+            for (const key in t) {
+                const elements = document.querySelectorAll(`[data-i18n="${key}"]`);
+                elements.forEach(el => el.innerHTML = t[key]);
+            }
+            const activeFilter = document.querySelector('.filter-btn.active').id.replace('btn-', '');
+            renderProjects(activeFilter);
+        }
+
+        // --- DATA SECTION: UPDATE YOUR PROJECTS HERE ---
+        const projects = [
+            {
+                id: 1, 
+                title: "YouTube Edit Transformation", 
+                category: "youtube", 
+                image: "https://images.unsplash.com/photo-1556740758-90de374c12ad?auto=format&fit=crop&q=80&w=400", // Replace with 'images/thumb1.jpg'
+                videoId: "youtube-edit-transformation-240p", // PASTE TELLA ID HERE
+                stats: null, 
+                vertical: false 
+            },
+            {
+                id: 2, 
+                title: "Podcast Edit", 
+                category: "youtube", 
+                image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=400", 
+                videoId: "why-some-clients-spend-a-lot-of-money-low-conversionsfinal-1-9xm9", 
+                stats: null, 
+                vertical: true 
+            },
+            {
+                id: 3, 
+                title: "VSL course video", 
+                category: "vsl", 
+                image: "https://images.unsplash.com/photo-1579532537598-459ecdaf39cc?auto=format&fit=crop&q=80&w=600", 
+                videoId: "why-some-clients-spend-a-lot-of-money-low-conversionsfinal-1-9xm9", 
+                stats: "joins_badge", 
+                vertical: false 
+            },
+            {
+                id: 4, 
+                title: "Tech Scroll-Stopping Hook for Personal Brand Content", 
+                category: "motion", 
+                image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&q=80&w=600", 
+                videoId: "why-some-clients-spend-a-lot-of-money-low-conversionsfinal-1-9xm9",
+                stats: "", 
+                vertical: true 
+            },
+            {
+                id: 5, 
+                title: "UGC-Style Ad Built for Conversions", 
+                category: "ads", 
+                image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=400", 
+                videoId: "saniv2-dskc",
+                stats: null, 
+                vertical: true 
+            },
+            {
+                id: 6, 
+                title: "UGC Talking-Head Ad with Strong CTA", 
+                category: "ads", 
+                image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&q=80&w=400", 
+                videoId: "sara-short-hook4-88zd",
+                stats: "followers_badge", 
+                vertical: true
+            },
+            {
+                id: 7, 
+                title: "YouTube Edit Transformation (Before -> After)", 
+                category: "youtube", 
+                image: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=600", 
+                videoId: "why-some-clients-spend-a-lot-of-money-low-conversionsfinal-1-9xm9",
+                stats: "followers_badge", 
+                vertical: true
+            },
+            {
+                id: 8, 
+                title: "Digital Course Ad — Primary Hook", 
+                category: "ads", 
+                image: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80&w=600", 
+                videoId: "short-video-v2-hook1-cu1f",
+                stats: null, 
+                vertical: true
+            },
+             {
+                id: 9, 
+                title: "Digital Course Ad — Pattern Break Variant", 
+                category: "ads", 
+                image: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80&w=600", 
+                videoId: "short-video-v2-hook-2-18k1",
+                stats: null, 
+                vertical: true
+            },
+             {
+                id: 10, 
+                title: "Skool Community Ad — Direct Response Hook", 
+                category: "ads", 
+                image: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80&w=600", 
+                videoId: "short-video-v2-hook-3-2y0g",
+                stats: null, 
+                vertical: true
+            },
+             {
+                id: 11, 
+                title: "Why High Ad Spend Doesn’t Guarantee Conversions", 
+                category: "motion", 
+                image: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80&w=600", 
+                videoId: "why-some-clients-spend-a-lot-of-money-low-conversionsfinal-1-9xm9",
+                stats: null, 
+                vertical: true
+            }
+        ];
+
+        const grid = document.getElementById('portfolio-grid');
+
+        // FULL SCREEN VIDEO PLAYER
+        function openModal(videoId) {
+            if (!videoId) return;
+
+            const modal = document.getElementById('video-modal');
+            const content = document.getElementById('modal-content');
+            
+            content.innerHTML = `
+                <div class="absolute inset-0 flex flex-col items-center justify-center text-white/50 z-0">
+                    <i class="fas fa-circle-notch fa-spin text-4xl mb-4 text-brand-purple"></i>
+                    <p class="text-sm font-bold tracking-widest uppercase text-white">Loading high-quality video...</p>
+                    <p class="text-xs text-gray-500 mt-2">Please wait a moment</p>
+                </div>
+                
+                <iframe 
+                    width="100%" 
+                    height="100%" 
+                    src="https://www.tella.tv/video/${videoId}/embed?b=1&title=1&a=1&loop=0&t=0&muted=0&wt=1" 
+                    title="Tella video player" 
+                    frameborder="0" 
+                    allowtransparency
+                    allow="autoplay; fullscreen; picture-in-picture" 
+                    allowfullscreen 
+                    class="absolute inset-0 w-full h-full z-10 transition-opacity duration-500"
+                    style="opacity: 0;"
+                    onload="this.style.opacity = 1">
+                </iframe>`;
+            
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('video-modal');
+            const content = document.getElementById('modal-content');
+            modal.classList.add('hidden');
+            content.innerHTML = '';
+            document.body.style.overflow = 'auto';
+        }
+
+        document.getElementById('video-modal').addEventListener('click', (e) => {
+            if(e.target.id === 'video-modal') closeModal();
+        });
+
+        // LIVING THUMBNAIL RENDERER
+        function renderProjects(filter) {
+            grid.innerHTML = '';
+            const filtered = filter === 'all' ? projects : projects.filter(p => p.category === filter);
+            
+            filtered.forEach((project, index) => {
+                const card = document.createElement('div');
+                card.style.animationDelay = `${index * 50}ms`;
+                // REMOVED 'break-inside-avoid' to fix grid gaps
+                card.className = `rounded-2xl overflow-hidden portfolio-card group cursor-pointer fade-in-up hover:border-[var(--hover-color)] transition-colors`;
+                
+                // CLICK OPENS MODAL WITH TELLA ID
+                card.onclick = () => openModal(project.videoId);
+                
+                const aspectClass = project.vertical ? 'aspect-[9/16]' : 'aspect-video';
+                
+                let iconColor = 'text-white';
+                let themeColor = '#8b5cf6';
+                if(project.category === 'ads') { iconColor = 'text-brand-green'; themeColor = '#10b981'; }
+                if(project.category === 'youtube') { iconColor = 'text-brand-red'; themeColor = '#ef4444'; }
+                if(project.category === 'motion') { iconColor = 'text-brand-blue'; themeColor = '#3b82f6'; }
+                if(project.category === 'vsl') { iconColor = 'text-brand-gold'; themeColor = '#f59e0b'; }
+
+                card.style.setProperty('--hover-color', themeColor);
+
+                let badgeText = "";
+                if(project.stats) badgeText = translations[currentLang][project.stats] || project.stats;
+
+                const badgeHTML = project.stats ? 
+                    `<div class="stats-badge">
+                        <i class="fas fa-fire ${iconColor}"></i>
+                        <span class="badge-text">${badgeText}</span>
+                    </div>` : '';
+
+                card.innerHTML = `
+                    <div class="relative w-full ${aspectClass}">
+                        <!-- TELLA LIVING THUMBNAIL -->
+                        <iframe 
+                            src="https://www.tella.tv/video/${project.videoId}/embed?b=1&title=0&a=1&loop=1&t=0&muted=1&controls=0" 
+                            style="border:0; width:100%; height:100%; object-fit: cover; pointer-events: none;" 
+                            allowfullscreen allowtransparency>
+                        </iframe>
+                        
+                        <!-- CLICK SHIELD (Crucial for capturing click to open modal) -->
+                        <div class="click-shield"></div>
+
+                        ${badgeHTML}
+                        <div class="play-btn-container absolute inset-0 bg-black/10 group-hover:bg-black/5 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100">
+                            <!-- White Triangle Only -->
+                            <i class="fas fa-play text-white text-5xl drop-shadow-lg z-50"></i>
+                        </div>
+                        <div class="absolute bottom-0 left-0 w-full p-4 glass-overlay">
+                            <h3 class="text-white font-semibold text-lg leading-tight transition-colors" style="color: white" onmouseover="this.style.color='${themeColor}'" onmouseout="this.style.color='white'">${project.title}</h3>
+                            <div class="flex items-center justify-between mt-2">
+                                <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">${translations[currentLang]['cat-'+project.category] || project.category}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                grid.appendChild(card);
+            });
+        }
+
+        function filterPortfolio(category) {
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.className = "filter-btn px-6 py-2 rounded-full border border-white/10 bg-transparent text-gray-400 text-xs font-bold tracking-wider transition-all hover:text-white uppercase";
+            });
+            const activeBtn = document.getElementById(`btn-${category}`);
+            let activeClass = "filter-btn active px-6 py-2 rounded-full text-white text-xs font-bold tracking-wider transition-all uppercase shadow-lg border ";
+            if(category === 'all') activeClass += "bg-brand-purple border-brand-purple";
+            else if (category === 'ads') activeClass += "bg-brand-green border-brand-green text-black";
+            else if (category === 'youtube') activeClass += "bg-brand-red border-brand-red";
+            else if (category === 'motion') activeClass += "bg-brand-blue border-brand-blue";
+            else if (category === 'vsl') activeClass += "bg-brand-gold border-brand-gold text-black";
+            activeBtn.className = activeClass;
+            renderProjects(category);
+        }
+
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        renderProjects('all');
+
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 20) {
+                nav.classList.add('shadow-xl', 'bg-[#020204]/95');
+                nav.classList.remove('bg-[#020204]/80');
+            } else {
+                nav.classList.remove('shadow-xl', 'bg-[#020204]/95');
+                nav.classList.add('bg-[#020204]/80');
+            }
+        });
+    </script>
+</body>
+</html>
